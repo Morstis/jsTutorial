@@ -3,16 +3,26 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { ArticelComponent } from './components/articel/articel.component';
+import { ExampleComponent } from './components/example/example.component';
+import { BasicRouterOutletComponent } from './components/basic-router-outlet/basic-router-outlet.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ArticelComponent,
+    ExampleComponent,
+    BasicRouterOutletComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [BasicRouterOutletComponent],
 })
-export class AppModule { }
+export class AppModule {}

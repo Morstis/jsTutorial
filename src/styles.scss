@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+  height: 100%;
+  //   display: flex;
+}
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  display: flex;
+}
+
+body > * {
+  flex-grow: 1;
+}
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+a {
+  color: dodgerblue;
+  text-decoration: none;
+
+  &:link {
+    color: dodgerblue;
+  }
+  &:visited {
+    color: dodgerblue;
+  }
+  &:active {
+    color: dodgerblue;
+  }
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently                              supported by Chrome and Opera */
+}
