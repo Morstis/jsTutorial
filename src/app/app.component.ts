@@ -1,38 +1,89 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  AfterViewInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take, startWith, switchMap } from 'rxjs/operators';
-import { timer, Subject } from 'rxjs';
+import { startWith, switchMap, map } from 'rxjs/operators';
+import { timer, Subject, BehaviorSubject, Observable } from 'rxjs';
+import data from './data';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
-  timer$: Subject<number> = new Subject();
-
+export class AppComponent implements OnInit, AfterViewInit {
+  console$ = new BehaviorSubject<string[]>(['del']);
+  data = data;
+  code = new BehaviorSubject<() => void>(() => {
+    console.log('loading');
+  });
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  ngAfterViewInit() {
+    window.scrollTo({
+      top: window.innerHeight * this.activatedRoute.snapshot.params.titel,
+      behavior: 'smooth',
+    });
+  }
   ngOnInit() {
-    this.timer$
+    this.activatedRoute.params.subscribe((param) => {
+      this.code.next(data[parseInt(param.titel, 10)].code);
+    });
+    const timer$: Subject<number> = new Subject();
+    window.console.log = (x) => {
+      this.console$.next([
+        ...this.console$.value,
+        (typeof x === 'object' ? JSON.stringify(x) : x) +
+          `
+`,
+      ]);
+    };
+    this.code.subscribe((code) => {
+      code();
+    });
+    timer$
       .pipe(
+        // tslint:disable-next-line: deprecation
         startWith(void 0),
-        switchMap(() => timer(0, 1000))
+        switchMap(() => timer(0, 5000))
       )
       .subscribe((res) => {
-        console.log(res);
+        if (res !== 0) {
+          window.scrollTo({
+            top: window.innerHeight * this.activatedRoute.snapshot.params.titel,
+            behavior: 'smooth',
+          });
+        }
       });
+    window.addEventListener('scroll', () => {
+      timer$.next(void 0);
+      this.router.navigate([Math.round(window.scrollY / window.innerHeight)]);
+    });
+  }
 
-    this.activatedRoute.params.pipe(take(1)).subscribe((param) => {
-      window.scrollTo({
-        top: window.innerHeight * param.titel,
-        behavior: 'smooth',
-      });
-    });
-    window.addEventListener('scroll', (e) => {
-      this.timer$.next(void 0);
-      this.router.navigate([
-        (window.scrollY / window.innerHeight).toString().split('.')[0],
-      ]);
-    });
+  parseCode(): Observable<string> {
+    return this.code.pipe(
+      map((x) =>
+        x
+          .toString()
+          .split(/=>/)
+          .join()
+          .slice(7, -1)
+          .split(
+            `
+`
+          )
+          .map((y) => y.slice(12)).join(`
+`)
+      )
+    );
+  }
+  out() {
+    return this.console$.pipe(
+      map((x) => x.filter((y) => y !== 'del').join(''))
+    );
   }
 }

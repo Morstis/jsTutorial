@@ -1,17 +1,20 @@
 <main>
-  <div>
-    <app-articel
-      ><h1>Der DOM</h1>
-      <p>
-        Der DOM ist der grundlegende Bestandteil einer Website...
-      </p></app-articel
-    >
-    <app-articel>Titel 2</app-articel>
-    <app-articel>Titel 3</app-articel>
+  <div id="left">
+    <app-articel *ngFor="let d of data"
+      ><h1>{{ d.titel }}</h1>
 
-    <app-articel>Titel 4</app-articel>
-
-    <app-articel>Titel 5</app-articel>
+      <p>Variablen sind (ähnlich, wie in Mathe) Platzhalter für Werte.</p>
+      <p>Sie halten sozusagen eine Zahl, ein Wort oder einen Buchstaben.</p>
+      {{ parseCode() | async }}
+    </app-articel>
   </div>
-  <div></div>
+
+  <label id="code"
+    >Code
+    <ngx-prism [code]="parseCode() | async" language="javaScript"></ngx-prism>
+  </label>
+  <label id="output">
+    Output
+    <ngx-prism [code]="out() | async" language="any"></ngx-prism>
+  </label>
 </main>

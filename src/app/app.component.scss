@@ -2,6 +2,34 @@ main {
   height: 100%;
   display: grid;
   width: 100%;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "left auto"
+    "left auto";
+  label {
+    position: fixed;
+    height: calc(50% - 2rem);
+    width: calc(50% - 2rem);
+    right: 0;
+    margin: 1rem;
+    & ::ng-deep pre {
+      height: calc(100% - 24px);
+      margin: 0;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+  #code {
+    top: 0;
+  }
+  #output {
+    top: 50%;
+    & ::ng-deep * {
+      color: lightgreen;
+    }
+  }
+
+  #left {
+    grid-area: left;
+  }
 }
