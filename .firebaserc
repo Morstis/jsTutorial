@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "jstutorial-a5361": {
+      "hosting": {
+        "jsTutorial": [
+          "jstutorial-a5361"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "jstutorial-a5361"
+  }
+}

@@ -3,8 +3,7 @@
     <app-articel *ngFor="let d of data"
       ><h1>{{ d.titel }}</h1>
 
-      <p>Variablen sind (ähnlich, wie in Mathe) Platzhalter für Werte.</p>
-      <p>Sie halten sozusagen eine Zahl, ein Wort oder einen Buchstaben.</p>
+      <div innerHTML="{{ d.text }}"></div>
     </app-articel>
   </div>
 
