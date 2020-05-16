@@ -13,14 +13,15 @@ import data from './data';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit, AfterViewInit {
   console$ = new BehaviorSubject<string[]>(['del']);
-  data = data;
-  code = new BehaviorSubject<() => void>(() => {
+  code$ = new BehaviorSubject<() => void>(() => {
     console.log('loading');
   });
+  data = data;
+
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
   ngAfterViewInit() {
     window.scrollTo({
@@ -30,7 +31,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
   ngOnInit() {
     this.activatedRoute.params.subscribe((param) => {
-      this.code.next(data[parseInt(param.titel, 10)].code);
+      this.console$.next(['del']);
+
+      this.code$.next(data[parseInt(param.titel, 10)].code);
     });
     const timer$: Subject<number> = new Subject();
     window.console.log = (x) => {
@@ -41,7 +44,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 `,
       ]);
     };
-    this.code.subscribe((code) => {
+    this.code$.subscribe((code) => {
       code();
     });
     timer$
@@ -65,7 +68,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   parseCode(): Observable<string> {
-    return this.code.pipe(
+    return this.code$.pipe(
       map((x) =>
         x
           .toString()

@@ -4,8 +4,11 @@ export default [
     code: () => {
       const einWort = 'test';
       const eineZahl = 1;
+      const einObject = { x: 'haha' };
+
       console.log(einWort);
       console.log(eineZahl);
+      console.log(einObject);
     },
   },
   {

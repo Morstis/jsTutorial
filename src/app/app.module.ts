@@ -6,16 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { ArticelComponent } from './components/articel/articel.component';
-import { ExampleComponent } from './components/example/example.component';
 import { BasicRouterOutletComponent } from './components/basic-router-outlet/basic-router-outlet.component';
-import { PrismModule } from '@ngx-prism/core';
+import { PrismModule } from '@ngx-prism/rxjs';
 @NgModule({
-  declarations: [
-    AppComponent,
-    ArticelComponent,
-    ExampleComponent,
-    BasicRouterOutletComponent,
-  ],
+  declarations: [AppComponent, ArticelComponent, BasicRouterOutletComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -5,16 +5,16 @@
 
       <p>Variablen sind (ähnlich, wie in Mathe) Platzhalter für Werte.</p>
       <p>Sie halten sozusagen eine Zahl, ein Wort oder einen Buchstaben.</p>
-      {{ parseCode() | async }}
     </app-articel>
   </div>
 
   <label id="code"
     >Code
-    <ngx-prism [code]="parseCode() | async" language="javaScript"></ngx-prism>
+    <prism-highlight [code]="parseCode() | async" language="javascript">
+    </prism-highlight>
   </label>
   <label id="output">
     Output
-    <ngx-prism [code]="out() | async" language="any"></ngx-prism>
+    <prism-highlight [code]="out() | async" language="any"></prism-highlight>
   </label>
 </main>
