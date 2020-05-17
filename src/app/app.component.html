@@ -7,13 +7,32 @@
     </app-articel>
   </div>
 
-  <label id="code"
-    >Code
-    <prism-highlight [code]="parseCode() | async" language="javascript">
-    </prism-highlight>
-  </label>
-  <label id="output">
-    Output
-    <prism-highlight [code]="out() | async" language="any"></prism-highlight>
-  </label>
+  <img
+    *ngIf="(foto$ | async) !== null ? true : false; else elseTem"
+    [src]="foto$ | async"
+    class="window"
+    id="code"
+  />
+
+  <ng-template #elseTem>
+    <label id="code" class="window"
+      >Code
+      <prism-highlight [code]="parseCode() | async" language="javascript">
+      </prism-highlight>
+    </label>
+  </ng-template>
+
+  <img
+    *ngIf="(foto2$ | async) !== null ? true : false; else elseTem2"
+    [src]="foto2$ | async"
+    class="window"
+    id="output"
+  />
+
+  <ng-template #elseTem2>
+    <label id="output" class="window">
+      Output
+      <prism-highlight [code]="out() | async" language="any"></prism-highlight>
+    </label>
+  </ng-template>
 </main>

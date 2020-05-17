@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
   // { path: '', component: AppComponent },
   { path: ':titel', component: AppComponent },
-  { path: '', pathMatch: 'full', redirectTo: '/0' },
+  { path: '', pathMatch: 'full', redirectTo: '/Stackblitz' },
 ];
 
 @NgModule({

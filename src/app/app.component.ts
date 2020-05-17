@@ -21,19 +21,34 @@ export class AppComponent implements OnInit, AfterViewInit {
     console.log('loading');
   });
   data = data;
+  foto$ = new BehaviorSubject<string>(null);
+  foto2$ = new BehaviorSubject<string>(null);
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
   ngAfterViewInit() {
     window.scrollTo({
-      top: window.innerHeight * this.activatedRoute.snapshot.params.titel,
+      top:
+        window.innerHeight *
+        this.getIndex(this.activatedRoute.snapshot.params.titel),
       behavior: 'smooth',
     });
   }
   ngOnInit() {
     this.activatedRoute.params.subscribe((param) => {
+      this.foto$.next(
+        data[this.getIndex(param.titel)].foto !== undefined
+          ? data[this.getIndex(param.titel)].foto
+          : null
+      );
+      this.foto2$.next(
+        data[this.getIndex(param.titel)].foto2 !== undefined
+          ? data[this.getIndex(param.titel)].foto2
+          : null
+      );
+
       this.console$.next(['del']);
 
-      this.code$.next(data[parseInt(param.titel, 10)].code);
+      this.code$.next(data[this.getIndex(param.titel)].code);
     });
     const timer$: Subject<number> = new Subject();
     window.console.log = (x) => {
@@ -56,14 +71,18 @@ export class AppComponent implements OnInit, AfterViewInit {
       .subscribe((res) => {
         if (res !== 0) {
           window.scrollTo({
-            top: window.innerHeight * this.activatedRoute.snapshot.params.titel,
+            top:
+              window.innerHeight *
+              this.getIndex(this.activatedRoute.snapshot.params.titel),
             behavior: 'smooth',
           });
         }
       });
     window.addEventListener('scroll', () => {
       timer$.next(void 0);
-      this.router.navigate([Math.round(window.scrollY / window.innerHeight)]);
+      this.router.navigate([
+        data[Math.round(window.scrollY / window.innerHeight)].titel,
+      ]);
     });
   }
 
@@ -88,5 +107,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     return this.console$.pipe(
       map((x) => x.filter((y) => y !== 'del').join(''))
     );
+  }
+  getIndex(titel) {
+    return this.data.map((x) => x.titel).indexOf(titel);
   }
 }

@@ -5,5 +5,12 @@ div {
     width: 100%;
     margin: 1rem;
     padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    ::ng-deep > div {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

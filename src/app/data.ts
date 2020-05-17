@@ -1,5 +1,43 @@
 export default [
   {
+    titel: 'Stackblitz',
+    text: `
+    <p>Nach Absprache mit Herr Brand haben wir uns entschlosssen, das Tool <a href="https://stackblitz.com/" target="_blank">Stackblitz</a> zu verwenden.</p>
+    <p>Hier der Link für ein einfaches JavaScript Projekt. <a href="https://stackblitz.com/fork/js" target="_blank">JavaScript</a></p>
+    <p>Wenn ihr auf den Link klickt, sollte sich ein neuer Tab öffnen und ihr landet in einem online Code Editor.</p>
+    <p>Hier befindet ihr euch automatisch in der JavaScript Datei.</p>
+    <p>Löscht zuerst den gesamten Inhalt in dieser <span class="green">(1)</span>.</p>
+    <p><span class="red">2</span> zeigt den Output eures Codes an.</p>
+    <p>Und bei <span class="orange">3</span> müsst ihr drauf klicken, um euch die Console anzeigen zu lassen.</p>
+    <p>Fahrt jetzt mit dem nächtsten Tutrial fort.</p>
+    </br>
+    </br>
+    <p>Sollte es Probleme mit Stackblitz geben, wendet euch an Herr Brand oder mich.</p>
+ `,
+
+    code: () => {},
+    foto: 'assets/Bildschirmfoto vom 2020-05-17 12-20-26.png',
+    foto2: undefined,
+  },
+
+  {
+    titel: 'Die Console',
+    text: `
+    <p>Die Console ist die grundlegende Ausgabe von dem Browser.</p>
+    <p>Auf dieser Website wird de console unten rechts ausgegben.</p>
+    <p>Wenn ihr auf anderen Websites (oder euren eigenen) seit, könnt ihr mit f12 in die Entwicklertools gehen.</p>
+    <p>Wenn ihr oben in der Leist auf Console klickt, solltet ihr den Consolen Output (also das was hier unten rechts angezeigt wird), sehen.</p>
+    <p>Bei stackblitz ist wird sie angezeigt wenn ihr auf den Pfeil klickt (s. vorheriges Tutorial).</p>
+
+    <div class="a"><p>Versuche in Stackblitz "Hallo Welt" in der Console auszugeben.</p>
+    </div>
+    `,
+
+    code: () => {
+      console.log(`Hallo Welt`);
+    },
+  },
+  {
     titel: 'Variablen',
     text: `
     <p>Variablen sind (ähnlich, wie in Mathe) Platzhalter für Werte.</p>
@@ -7,8 +45,6 @@ export default [
     <p>Um eine Variable anzulegen wird 'let' gefolgt von dem Namen der Variable benötigt.</p>
     <p>Die so angelete Variable hat noch keinen Wert. das heißt, wenn man versuch sie zu loggen (s. Z.4), wird 'undefined' (Undefiniert) angezeigt.</p>
     </br>
-    
-    
     `,
 
     code: () => {
