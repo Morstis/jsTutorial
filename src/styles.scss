@@ -26,15 +26,14 @@ body {
 .orange {
   color: orange;
 }
+.blue {
+  color: lightblue;
+}
 .a {
   margin: auto auto 0 0;
   color: rgba(lightblue, 1);
   &::before {
     content: "Übungen:";
-  }
-  & > *::before {
-    content: "- ";
-    margin-left: 1rem;
   }
 }
 body > * {
